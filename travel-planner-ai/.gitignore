@@ -1,0 +1,30 @@
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# CrewAI
+crew_output/
+*.log
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Output files generated at runtime
+output/
+*.md
+!README.md

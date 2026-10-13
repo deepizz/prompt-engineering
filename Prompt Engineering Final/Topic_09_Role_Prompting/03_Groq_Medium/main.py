@@ -1,0 +1,49 @@
+import os
+from dotenv import load_dotenv
+from openai import OpenAI
+
+# Load environment variables
+load_dotenv()
+
+client = OpenAI(
+    api_key=os.getenv("GROQ_API_KEY"),
+    base_url="https://api.groq.com/openai/v1"
+)
+
+question = input("Enter your question: ")
+
+roles = [
+    "Teacher",
+    "Software Engineer",
+    "HR Manager",
+    "Business Consultant"
+]
+
+for role in roles:
+
+    prompt = f"""
+ROLE:
+You are an experienced {role}.
+
+TASK:
+Answer the following question from the perspective of your role.
+
+Question:
+{question}
+"""
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        temperature=0.3
+    )
+
+    print("\n" + "=" * 60)
+    print(f"ROLE: {role}")
+    print("=" * 60)
+    print(response.choices[0].message.content)
